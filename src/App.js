@@ -1,28 +1,75 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import styled from 'styled-components'
+import Header from './components/Header'
+import Content from './components/Content'
+import LeftDrawer from './components/LeftDrawer'
+import { BrowserRouter as Router } from 'react-router-dom'
+import Login from './components/Login'
+import RightDrawer from './components/RightDrawer'
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+`
 
 class App extends Component {
-  render() {
+  state = {
+    left: {
+      open: false
+    },
+    login: {
+      open: false
+    },
+    right: {
+      open: false
+    }
+  }
+
+  handleClose = position => () => {
+    this.setState({ [position]: { open: false } })
+  }
+
+  toggleModal = position => () => {
+    const prev = this.state[position]
+    if (this.state[position].open) {
+      this.setState({ [position]: { ...prev, open: false } })
+    } else {
+      this.setState({ [position]: { ...prev, open: true } })
+    }
+  }
+
+  render () {
+    const { left, login, right } = this.state
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+      <Router>
+        <Container>
+          <Header
+            toggleLeftDrawer={this.toggleModal('left')}
+            toggleLogin={this.toggleModal('login')}
+            toggleDetails={this.toggleModal('right')}
+          />
+          <Content />
+          <LeftDrawer
+            open={left.open}
+            onClick={this.toggleModal('left')}
+            onClose={this.handleClose('left')}
+          />
+          <RightDrawer
+            open={right.open}
+            onClick={this.toggleModal('right')}
+            onClose={this.handleClose('right')}
+          />
+          <Login
+            open={login.open}
+            handleLogin={this.handleClose('login')}
+            handleCancel={this.handleClose('login')}
+            handleSignup={this.handleClose('login')}
+          />
+        </Container>
+      </Router>
+    )
   }
 }
 
-export default App;
+export default App
