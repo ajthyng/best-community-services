@@ -5,6 +5,10 @@ import AppBar from '@material-ui/core/AppBar'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import AdminPages from './AdminPages'
+import CreateAccountForm from './CreateAccountForm'
+import ManageAccounts from './ManageAccounts'
+import CreateService from './CreateServiceForm'
+import ManageServices from './ManageServices'
 
 const Container = styled.div`
   display: flex;
@@ -21,15 +25,15 @@ const ContentZone = styled(Paper)`
 `
 
 const adminPages = [
-  { label: 'Create Account' },
-  { label: 'Manage Accounts' },
-  { label: 'Create New Service' },
-  { label: 'Manage Services' }
+  { label: 'Create Account', component: CreateAccountForm },
+  { label: 'Manage Accounts', component: ManageAccounts },
+  { label: 'Create New Service', component: CreateService },
+  { label: 'Manage Services', component: ManageServices }
 ]
 
 class Admin extends Component {
   state = {
-    value: 0
+    value: 3
   }
 
   handleChange = (event, value) => {
@@ -50,8 +54,8 @@ class Admin extends Component {
               variant='scrollable'
               scrollButtons='auto'
             >
-              {adminPages.map(({ label }) => (
-                <Tab label={label} />
+              {adminPages.map(({ label }, i) => (
+                <Tab key={`${label}-${i}`} label={label} />
               ))}
             </Tabs>
           </AppBar>

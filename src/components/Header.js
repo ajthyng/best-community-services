@@ -6,6 +6,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
+import { Subject } from '../utils/subject'
 
 const styles = {
   grow: {
@@ -19,7 +20,7 @@ const styles = {
 
 class Header extends PureComponent {
   render () {
-    const { classes, toggleLeftDrawer, toggleDetails, toggleLogin } = this.props
+    const { classes, toggleLeftDrawer, toggleLogin } = this.props
     return (
       <div style={{ zIndex: 10 }}>
         <AppBar position='static'>
@@ -35,7 +36,7 @@ class Header extends PureComponent {
             <Typography variant='h6' color='inherit' className={classes.grow}>
               Best Community Services
             </Typography>
-            <Button color='inherit' onClick={toggleDetails}>
+            <Button color='inherit' onClick={() => Subject.next('open_right')}>
               TEMP_OPEN_DETAILS
             </Button>
             <Button color='inherit' onClick={toggleLogin}>

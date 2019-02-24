@@ -20,9 +20,6 @@ class App extends Component {
     },
     login: {
       open: false
-    },
-    right: {
-      open: false
     }
   }
 
@@ -40,14 +37,13 @@ class App extends Component {
   }
 
   render () {
-    const { left, login, right } = this.state
+    const { left, login } = this.state
     return (
       <Router>
         <Container>
           <Header
             toggleLeftDrawer={this.toggleModal('left')}
             toggleLogin={this.toggleModal('login')}
-            toggleDetails={this.toggleModal('right')}
           />
           <Content />
           <LeftDrawer
@@ -55,11 +51,7 @@ class App extends Component {
             onClick={this.toggleModal('left')}
             onClose={this.handleClose('left')}
           />
-          <RightDrawer
-            open={right.open}
-            onClick={this.toggleModal('right')}
-            onClose={this.handleClose('right')}
-          />
+          <RightDrawer />
           <Login
             open={login.open}
             handleLogin={this.handleClose('login')}

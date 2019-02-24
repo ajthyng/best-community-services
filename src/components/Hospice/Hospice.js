@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import HospiceServices from '../Services'
 import Typography from '@material-ui/core/Typography'
 
 const Container = styled.div`
@@ -7,13 +8,17 @@ const Container = styled.div`
   flex: 1;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 `
 
 class Hospice extends Component {
   render () {
     return (
       <Container>
-        <Typography variant='h3'>Hospice and In Home Services</Typography>
+        <Typography style={{ marginTop: 16 }} variant='h2'>
+          Hospice Services
+        </Typography>
+        <HospiceServices title='Hospice Service' />
       </Container>
     )
   }

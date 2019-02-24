@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import Paper from '@material-ui/core/Paper'
 import styled from 'styled-components'
-import Typography from '@material-ui/core/Typography'
+import Events from './Events'
+import Donations from './Donations'
+import Services from '../Services'
 
 const Container = styled.div`
   display: flex;
@@ -24,6 +25,7 @@ const ListingArea = styled.div`
   display: inherit;
   margin: 4px 4px 8px 8px;
   flex: 10;
+  overflow: auto;
 `
 
 const DonationsArea = styled.div`
@@ -32,8 +34,22 @@ const DonationsArea = styled.div`
   flex: 2;
 `
 
-const ContentZone = styled(Paper)`
-  flex: 1
+const DonationZone = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const ContentZone = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const EventsZone = styled.div`
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,20 +60,20 @@ class Home extends Component {
     return (
       <Container>
         <UpcomingEventsArea>
-          <ContentZone>
-            <Typography variant='h4'>Upcoming Events</Typography>
-          </ContentZone>
+          <EventsZone>
+            <Events />
+          </EventsZone>
         </UpcomingEventsArea>
         <ColumnArea>
           <ListingArea>
             <ContentZone>
-              <Typography variant='h4'>Services</Typography>
+              <Services />
             </ContentZone>
           </ListingArea>
           <DonationsArea>
-            <ContentZone>
-              <Typography variant='h4'>Donations</Typography>
-            </ContentZone>
+            <DonationZone>
+              <Donations />
+            </DonationZone>
           </DonationsArea>
         </ColumnArea>
       </Container>

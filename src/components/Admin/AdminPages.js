@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import Typography from '@material-ui/core/Typography'
 
 const Container = styled.div`
   display: flex;
   flex: 1;
+  flex-direction: column;
   min-width: 100%;
   align-items: center;
   justify-content: center;
@@ -13,9 +13,10 @@ const Container = styled.div`
 class AdminPages extends Component {
   render () {
     const { page } = this.props
+    const PageComponent = page.component || (() => null)
     return (
       <Container>
-        <Typography variant='h3'>{page.label}</Typography>
+        <PageComponent />
       </Container>
     )
   }

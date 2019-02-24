@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Drawer from '@material-ui/core/Drawer'
 import styled from 'styled-components'
+import { Subject } from '../utils/subject'
 
 const Details = styled.div`
   display: flex;
@@ -11,15 +12,40 @@ const Details = styled.div`
 `
 
 class RightDrawer extends Component {
+  state = {
+    open: false
+  }
+
+  open = () => {
+    if (!this.state.open) {
+      this.setState({ open: true })
+    }
+  }
+
+  close = () => {
+    if (this.state.open) {
+      this.setState({ open: false })
+    }
+  }
+
+  componentDidMount () {
+    Subject.subscribe('open_right', this.open)
+    Subject.subscribe('close_right', this.close)
+  }
+
+  componentWillUnmount () {
+    Subject.unsubscribe('open_right', this.open)
+    Subject.unsubscribe('close_right', this.close)
+  }
+
   goToRoute = name => () => {
     const { history } = this.props
     history && history.push(name)
   }
-  render () {
-    const { open, onClose } = this.props
 
+  render () {
     return (
-      <Drawer open={open} onClose={onClose} anchor='right'>
+      <Drawer open={this.state.open} onClose={this.close} anchor='right'>
         <Details>Item Details</Details>
       </Drawer>
     )
